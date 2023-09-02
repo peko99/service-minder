@@ -1,7 +1,7 @@
 # Copyright 2023 Marin Pejcin
 
 
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 
 class APIConfig(BaseSettings):

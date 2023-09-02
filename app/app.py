@@ -4,16 +4,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.routers import service
 
-api = FastAPI()
+
+app = FastAPI()
 
 origins = ["*"]
 
-api.add_middleware(
+app.add_middleware(
     CORSMiddleware, allow_origins=origins, allow_methods=["*"], allow_headers=["*"]
 )
 
 
-@api.get("/")
+app.include_router(service.router)
+
+
+@app.get("/")
 async def root():
-    return {"status": "working"}
+    return {"status": "healthy"}
