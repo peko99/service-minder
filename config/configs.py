@@ -3,7 +3,7 @@
 
 from functools import lru_cache
 
-from config import api, database
+from config import api, database, security, email
 
 
 @lru_cache()
@@ -14,3 +14,13 @@ def get_api_config():
 @lru_cache()
 def get_database_config():
     return database.config
+
+
+@lru_cache()
+def get_security_config():
+    return security.config
+
+
+@lru_cache()
+def get_email_config():
+    return email.config
