@@ -30,6 +30,9 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     def get_all(self, db: Session) -> List[ModelType]:
         return db.query(self.model).all()
+    
+    def get_multi(self, limit: int, skip: int, db: Session) -> List[ModelType]:
+        return db.query(self.model).limit(limit).offset(skip).all()
 
     def create(self, *, obj_in: CreateSchemaType, db: Session) -> ModelType:
         obj_in_data = jsonable_encoder(obj_in)

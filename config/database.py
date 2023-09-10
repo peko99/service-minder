@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings
 class DatabaseConfig(BaseSettings):
     user: str = ""
     password: str = ""
-    host: str = "host"
+    host: str = ""
     port: str = "5432"
     database: str = "service_minder"
 
