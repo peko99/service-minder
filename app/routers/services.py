@@ -16,7 +16,9 @@ router = APIRouter(prefix="/service", tags=["service"], dependencies=[Depends(ge
 
 
 @router.post("", response_model=Service)
-async def create_service(service_in: ServiceCreate, db: Session = Depends(get_db)) -> Any:
+async def create_service(
+    service_in: ServiceCreate, db: Session = Depends(get_db)
+) -> Any:
     try:
         created_service = crud_service.create(obj_in=service_in, db=db)
     except IntegrityError as _:

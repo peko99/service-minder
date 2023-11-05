@@ -4,7 +4,7 @@
 import logging
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from sqlalchemy_utils import database_exists, create_database
 
 from config.configs import get_database_config
@@ -26,9 +26,11 @@ def initialize_database(db_engine):
         create_database(db_engine.url)
 
 
-engine = create_engine(get_database_url())
+engine = create_engine(get_database_url(), future=True)
 initialize_database(engine)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, future=True)
 
-Base = declarative_base()
+
+class Base(DeclarativeBase):
+    pass

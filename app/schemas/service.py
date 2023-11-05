@@ -6,11 +6,15 @@ from pydantic import BaseModel, UUID4
 
 
 class ServiceBase(BaseModel):
-    description: Optional[str] = None
+    name: Optional[str] = None
+    labour_cost: Optional[int] = None
+    parts_total_cost: Optional[int] = None
 
 
 class ServiceCreate(ServiceBase):
-    description: str
+    name: str
+    labour_cost: int
+    parts_total_cost: int
 
 
 class ServiceUpdate(ServiceBase):
@@ -19,7 +23,7 @@ class ServiceUpdate(ServiceBase):
 
 class Service(ServiceBase):
     id_: UUID4
-    description: str
+    expense_id: UUID4
 
     class Config:
-        orm_mode = True
+        from_attributes = True
